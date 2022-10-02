@@ -5,6 +5,8 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.util.ArrayList;
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -14,7 +16,13 @@ public abstract class Bag {
      *       - an array of Strings named contents
      */
 
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private ArrayList<String> contents;
 
+    protected Bag() {
+    }
 
 
     /*
@@ -27,7 +35,12 @@ public abstract class Bag {
      * its contents.)
      */
 
-
+    public Bag(String color, int capacity) {
+        this.color = color;
+        this.capacity = capacity;
+        numberOfContents = 0;
+        contents = new ArrayList<>();
+    }
 
 
     /*
@@ -38,16 +51,26 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return color;
+    }
 
+    public int getNumberOfContents() {
+        return numberOfContents;
+    }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
-
+    public void setColor(String new_color) {
+        color = new_color;
+    }
 
 
     /*
@@ -61,8 +84,14 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
-
-
+    public boolean addItem(String item) {
+        if (numberOfContents < capacity) {
+            contents.add(item);
+            numberOfContents += 1;
+            return true;
+        }
+        return false;
+    }
 
 
     /**
@@ -76,9 +105,16 @@ public abstract class Bag {
      * @return
      */
 
-
-
-
+    public String popItem() {
+        if (numberOfContents == 0) {
+            return null;
+        } else {
+            numberOfContents -= 1;
+            String popped_item = contents.get(numberOfContents);
+            contents.remove(numberOfContents);
+            return popped_item;
+        }
+    }
 
     /**
      * Increase this bag's capacity by n.
@@ -87,7 +123,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        capacity += n;
     }
 
     /**
